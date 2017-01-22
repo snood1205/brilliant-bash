@@ -25,10 +25,12 @@ weather() {curl wttr.in/"$1";}
 
 alias myip = "curl http://ipecho.net/plain; echo"
 
-# update (using pacman): update all of your packages!
+if [ "$(uname)" == "Darwin" ]; then
+  # update (using homebrew): update homebrew, and then all of your packages!
 
-alias update = "sudo pacman -Syyu"
+  alias update = "homebrew update; homebrew upgrade --all; brew cleanup -s"
+else
+  # update (using pacman): update all of your packages!
 
-# update (using homebrew): update homebrew, and then all of your packages!
-
-alias update = "homebrew update; homebrew upgrade --all; brew cleanup -s"
+  alias update = "sudo pacman -Syyu"
+fi
